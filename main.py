@@ -60,7 +60,7 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.click_number_text(data,PHONE_NUMBER)
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        assert data.PHONE_NUMBER in routes_page.number_confirm()
+        assert data.PHONE_NUMBER in routes_page.numero_confirmado()
         time.sleep(5)
 
     def test_fill_card(self):

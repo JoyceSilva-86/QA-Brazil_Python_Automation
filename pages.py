@@ -82,4 +82,12 @@ def click_number_text(self, telefone):
 
     code = retrieve_phone_code(self.driver)
     code_input = WebDriverWait(self.driver, 3).until(Ec.visibility_of_element_located(self.number_code))
+    code_input.clear()
+    code.input.send_keys(code)
+    self.driver.find_element(*self.driver, number_finish)
+
+def numero_confirmado():
+    numero = WebDriverWait(self.driver, 10).until(Ec.visibility_of_element_located(number_finish))
+    return numero.text
+
 
