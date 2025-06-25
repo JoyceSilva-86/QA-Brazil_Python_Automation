@@ -1,8 +1,6 @@
 import time
 import data
 import helpers
-from data import PHONE_NUMBER
-
 from pages import UrbanRoutesPage
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -26,24 +24,20 @@ class TestUrbanRoutes:
     def test_set_route(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         routes_page = UrbanRoutesPage(self.driver)
-
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
-
         WebDriverWait(self.driver, 2).until(lambda d: True)
         assert routes_page.get_from_location_value() == data.ADDRESS_FROM
         assert routes_page.get_to_location_value() == data.ADDRESS_TO
-
         time.sleep(5)
 
-
     def test_select_plan(self):
-       self.driver.get(data.URBAN_ROUTES_URL)
+        self.driver.get(data.URBAN_ROUTES_URL)
         routes_page = UrbanRoutesPage(self.driver)
         routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.click_taxi_option()
-        WebDriverWait(self.driver, 2).until(lambda  d: True)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.click_comfort_icon()
         WebDriverWait(self.driver, 2).until(lambda d: True)
         assert routes_page.click_comfort_active()
@@ -58,7 +52,7 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.click_comfort_icon()
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        routes_page.click_number_text(data,PHONE_NUMBER)
+        routes_page.click_number_text(data.PHONE_NUMBER)
         WebDriverWait(self.driver, 2).until(lambda d: True)
         assert data.PHONE_NUMBER in routes_page.numero_confirmado()
         time.sleep(5)
@@ -74,11 +68,11 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.click_add_cartao(data.CARD_NUMBER, data.CARD_CODE)
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        assert "Cartão" in routes_page.confirm_cartao
+        assert "Cartão" in routes_page.confirm_cartao()
         time.sleep(5)
 
     def test_comment_for_driver(self):
-         self.driver.get(data.URBAN_ROUTES_URL)
+        self.driver.get(data.URBAN_ROUTES_URL)
         routes_page = UrbanRoutesPage(self.driver)
         routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
         WebDriverWait(self.driver, 2).until(lambda d: True)
@@ -88,7 +82,7 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.add_comentario(data.MESSAGE_FOR_DRIVER)
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        assert data.MESSAGE_FOR_DRIVER in routes_page.comment_confirm
+        assert data.MESSAGE_FOR_DRIVER in routes_page.comment_confirm()
         time.sleep(5)
 
     def test_order_blanket_and_handkerchiefs(self):
@@ -104,7 +98,6 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         time.sleep(5)
 
-
     def test_order_2_ice_creams(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         routes_page = UrbanRoutesPage(self.driver)
@@ -119,8 +112,6 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         assert int(routes_page.qnt_sorvete()) == 2
         time.sleep(5)
-
-
 
     def test_car_search_model_appears(self):
         self.driver.get(data.URBAN_ROUTES_URL)
@@ -139,6 +130,5 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.call_taxi()
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        assert "Buscar carro" in routes_page.pop_up_show
-
-
+        assert "Buscar carro" in routes_page.pop_up_show()
+        time.sleep(5)
