@@ -72,29 +72,73 @@ class TestUrbanRoutes:
         WebDriverWait(self.driver, 2).until(lambda d: True)
         routes_page.click_comfort_icon()
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        routes_page.click_add_card(data.CARD_NUMBER, data.CARD_CODE)
+        routes_page.click_add_cartao(data.CARD_NUMBER, data.CARD_CODE)
         WebDriverWait(self.driver, 2).until(lambda d: True)
-        assert "Cartão" in routes_page.confirm_card
+        assert "Cartão" in routes_page.confirm_cartao
+        time.sleep(5)
+
     def test_comment_for_driver(self):
-        # Adicionar em S8
-        print("função criada para definir o motorista")
-        pass
+         self.driver.get(data.URBAN_ROUTES_URL)
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_taxi_option()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_comfort_icon()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.add_comentario(data.MESSAGE_FOR_DRIVER)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        assert data.MESSAGE_FOR_DRIVER in routes_page.comment_confirm
+        time.sleep(5)
 
     def test_order_blanket_and_handkerchiefs(self):
-        # Adicionar em S8
-        print("função criada para definir pedido de cobertor")
-        pass
+        self.driver.get(data.URBAN_ROUTES_URL)
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_taxi_option()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_comfort_icon()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.swicth_cobertor()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        time.sleep(5)
+
 
     def test_order_2_ice_creams(self):
-        # Adicionar em S8
-        number_of_ice_creams = 2
-        for count in range(number_of_ice_creams):
-            print("função criada para definir pedido de sorvete")
-        pass
+        self.driver.get(data.URBAN_ROUTES_URL)
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_taxi_option()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_comfort_icon()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        for _ in range(2):
+            routes_page.add_icecream()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        assert int(routes_page.qnt_sorvete()) == 2
+        time.sleep(5)
+
+
 
     def test_car_search_model_appears(self):
-        # Adicionar em S8
-        print("função criada para definir modelo de carro")
-        pass
+        self.driver.get(data.URBAN_ROUTES_URL)
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_taxi_option()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_comfort_icon()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_number_text(data.PHONE_NUMBER)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.click_add_cartao(data.CARD_NUMBER, data.CARD_CODE)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.add_comentario(data.MESSAGE_FOR_DRIVER)
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        routes_page.call_taxi()
+        WebDriverWait(self.driver, 2).until(lambda d: True)
+        assert "Buscar carro" in routes_page.pop_up_show
 
 

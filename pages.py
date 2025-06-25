@@ -1,5 +1,6 @@
 from html.parser import commentclose
 from logging import exception
+from time import sleep
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as Ec
@@ -33,7 +34,7 @@ confirm_card = (By.CSS_SELECTOR,'.pp-value-text')
 
 add_comment = (By.ID, 'Comment')
 switch_blanquet = (By.CSS_SELECTOR, '.switch')
-switch_blaquet_active = (By.CSS_SELECTOR, '#root > div') #terminar
+switch_blaquet_active = (By.CSS_SELECTOR, '#root > div > div.workflow > div.workflow-subcontainer > div.tariff-picker.shown > div.form > div.reqs.open > div.reqs-body > div:nth-child(1) > div > div.r-sw > div > span') #terminar
 
 add_icecream = (By.CSS_SELECTOR, '.counter-plus')
 qnt_icecream = (By.CSS_SELECTOR, '.counter-value')
@@ -89,5 +90,47 @@ def click_number_text(self, telefone):
 def numero_confirmado():
     numero = WebDriverWait(self.driver, 10).until(Ec.visibility_of_element_located(number_finish))
     return numero.text
+
+def click_add_cartao(self,cartao,code):
+    self.driver.find_element(*self.add_metodo_pagamento).click()
+    self.driver.find_element(*self.add_card).click()
+    sleep.time(5)
+    self.driver.find_element(*self.number_card).send_keys(cartao)
+     sleep.time(5)
+    self.driver.find_element(*self.code_card).send_keys(code)
+     sleep.time(5)
+    self.driver.find_element(*self.add_finish_card).click()
+    sleep.time(5)
+    self.driver.find_element(*self.close_button_card).click()
+    
+def confirm_cartao(self):
+    return self.driver.find_element(*self.confirm_card).text
+
+def add_comentario(self, comentario):
+    self.driver.find_element(*self.add_comment).send_keys(comentario)
+
+def comment_confirm(self):
+    return self.driver.find_element(*self.add_comment).get_attribute('value')
+
+def switch_cobertor(self):
+    switch_ativo = self.driver.find_element(*self.switch_blanket)
+    switch_ativo.click()
+
+def switch_cobertor_active(self):
+    switch = WebDriverWait(self.driver, 10).until(Ec.visibility_of_element_located(self.switch_blanket_active))
+    return switch.is_selected()
+
+def add_icecream(self):
+    self.driver.find_element(*self.add_icecream).click()
+
+def qnt_icecream(self):
+    self.driver.find_element(*self.qnt_icecream).text
+
+def call_taxi(self):
+    self.driver.find_element(*self.call_taxi_button).click()
+
+def pop_up_show(self):
+    pop_up = WebDriverWait(self.driver,10).until(Ec.presence_of_element_located(self.pop_up))
+    return pop_up.text
 
 
