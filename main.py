@@ -50,7 +50,7 @@ class TestUrbanRoutes:
         routes_page.click_comfort_icon()
         routes_page.click_number_text(data.PHONE_NUMBER)
         assert data.PHONE_NUMBER in routes_page.numero_confirmado()
-
+        time.sleep(5)
 
 
     def test_fill_card(self):
@@ -61,7 +61,7 @@ class TestUrbanRoutes:
         routes_page.click_comfort_icon()
         routes_page.click_add_cartao(data.CARD_NUMBER, data.CARD_CODE)
         assert "Cartão" in routes_page.confirm_cartao()
-
+        time.sleep(5)
 
 
     def test_comment_for_driver(self):
